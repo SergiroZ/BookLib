@@ -4,6 +4,9 @@
 
     partial class LibraryDataSet
     {
+        partial class BookRelavityDataTable
+        {
+        }
     }
 }
 

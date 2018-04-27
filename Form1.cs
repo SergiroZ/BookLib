@@ -51,17 +51,25 @@ namespace BookLib
                 MessageBox.Show("\tУдаление связанных записей...\n");
                 MessageBox.Show(authorSelRowNum.ToString());
 
-                var query = libraryDataSet.Book.AsEnumerable().
-                                Where(r => r.Field<int>("Id") == authorSelRowNum);
-                foreach (var row in query.ToList())
-                    row.Delete();
+                try
+                {
+                    var query = libraryDataSet.Book.AsEnumerable().
+                                    Where(r => r.Field<int>("IdAuthor") == authorSelRowNum);
+                    foreach (var row in query.ToList())
+                    {
+                        libraryDataSet.Book.Rows.Find((int)row.Field<int>("Id")).Delete();
+                    }
 
-                bookTableAdapter.Update(libraryDataSet.Book);
+                    //bookTableAdapter.Fill(libraryDataSet.Book);
+                    //bookTableAdapter.Update(libraryDataSet.Book);
+                    //bookRelavityTableAdapter.Fill(libraryDataSet.BookRelavity);
 
-                bookRelavityTableAdapter.Fill(libraryDataSet.BookRelavity);
-                //dataGridView1.Update();
-                //dataGridView1.Refresh();
-                //dataGridView1.Show();
+                    this.tableAdapterManager.UpdateAll(this.libraryDataSet);
+                }
+                catch (System.Data.SqlClient.SqlException)
+                {
+                    //throw;
+                }
             }
         }
 

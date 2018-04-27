@@ -17,15 +17,15 @@ namespace BookLib
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            try
-            {
-                Application.Run(new Form1());
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Exception.");
-                //throw;
-            }
+            //try
+            //{
+            Application.Run(new Form1());
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Exception.");
+            //    //throw;
+            //}
         }
     }
 }
